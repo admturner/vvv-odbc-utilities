@@ -1,28 +1,5 @@
 #!/usr/bin/env bash
 
-DIR=`dirname $0`
-
-# PACKAGE INSTALLATION
-#
-# Much of this is copied from the default VVV provisioning methods.
-#
-# Build a bash array to pass all of the packages we want to install to a single
-# apt-get command. This avoids doing all the leg work each time a package is
-# set to install. It also allows us to easily comment out or add single
-# packages. We set the array as empty to begin with so that we can append
-# individual packages to it as required.
-apt_package_install_list=()
-
-# Start with a bash array containing all packages we want to install in the
-# virtual machine. We'll then loop through each of these and check individual
-# status before adding them to the apt_package_install_list array.
-apt_package_check_list=(
-  # PHP7.2 should be installed by default in VVV 2.4+
-  # ODBC packages
-  unixodbc-dev
-  msodbcsql17
-)
-
 ### FUNCTIONS
 
 network_detection() {
@@ -71,29 +48,24 @@ print_pkg_info() {
   printf " * $pkg %${real_space}.${#pkg_version}s ${pkg_version}\n"
 }
 
-package_check() {
-  # Loop through each of our packages that should be installed on the system. If
-  # not yet installed, it should be added to the array of packages to install.
-  local pkg
+unixodbc_install() {
   local pkg_version
 
-  for pkg in "${apt_package_check_list[@]}"; do
-    if not_installed "${pkg}"; then
-      echo " *" "$pkg" [not installed]
-      apt_package_install_list+=($pkg)
-    else
-      pkg_version=$(dpkg -s "${pkg}" 2>&1 | grep 'Version:' | cut -d " " -f 2)
-      print_pkg_info "$pkg" "$pkg_version"
-    fi
-  done
+  if not_installed "unixodbc-dev"; then
+    echo " * unixodbc-dev [not installed]"
+    echo "Installing unixodbc-dev apt-get packages..."
+    apt-get -y install unixodbc-dev
+  else
+    pkg_version=$(dpkg -s "unixodbc-dev" 2>&1 | grep 'Version:' | cut -d " " -f 2)
+    print_pkg_info "unixodbc-dev" "$pkg_version"
+  fi
 }
 
-package_install() {
-  package_check
+msodbcsql_install() {
+  local pkg_version
 
-  if [[ ${#apt_package_install_list[@]} = 0 ]]; then
-    echo -e "No apt packages to install.\n"
-  else
+  if not_installed "msodbcsql17"; then
+    echo " * msodbcsql17 [not installed]"
 
     # Apply the MS ODBC signing key
     wget --quiet https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
@@ -106,17 +78,25 @@ package_install() {
     apt-get -y update
 
     # Install required packages
-    echo "Installing apt-get packages..."
-    ACCEPT_EULA=Y apt-get -y install ${apt_package_install_list[@]}
+    echo "By installing this package you agree with the MS ODBC Drivers EULA"
+    echo "Installing msodbcsql17 apt-get packages..."
+    ACCEPT_EULA=Y apt-get install msodbcsql17
+  else
+    pkg_version=$(dpkg -s "msodbcsql17" 2>&1 | grep 'Version:' | cut -d " " -f 2)
+    print_pkg_info "msodbcsql17" "$pkg_version"
+  fi
+}
 
+clean() {
     # Remove unnecessary packages
     echo "Removing unnecessary packages..."
     apt-get autoremove -y
 
     # Clean up apt caches
     apt-get clean
-  fi
 }
 
 network_check
-package_install
+unixodbc_install
+msodbcsql_install
+clean
