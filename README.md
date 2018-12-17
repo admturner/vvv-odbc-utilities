@@ -14,10 +14,9 @@ Add the following to your `vvv-custom.yml` configuration file:
 utilities:
   odbc:
     - odbc-mssql17 # MS SQL server ODBC libraries
-    - sqlsvr72 # MS SQL PHP 7.2 drivers
+    - sqlsrv72 # MS SQL PHP 7.2 drivers
 utility-sources:
   odbc: https://github.com/admturner/vvv-odbc-utilities.git
-  branch: master
 ```
 
 So that your final "utilities" list may look something like this:
@@ -33,11 +32,10 @@ utilities:
     - tls-ca # SSL
   odbc:
     - odbc-mssql17 # MS SQL server ODBC libraries
-    - sqlsvr72 # MS SQL PHP 7.2 drivers
+    - sqlsrv72 # MS SQL PHP 7.2 drivers
 
 utility-sources:
   odbc: https://github.com/admturner/vvv-odbc-utilities.git
-  branch: master
 ```
 
 For more see the [official VVV documentation on utilities](https://varyingvagrantvagrants.org/docs/en-US/utilities/).
@@ -62,8 +60,8 @@ For more see the [official VVV documentation on utilities](https://varyingvagran
 
 **SQL SVR**
 
-* `sqlsvr70`
-* `sqlsvr72`
+* `sqlsrv70`
+* `sqlsrv72`
 
 ## References
 
