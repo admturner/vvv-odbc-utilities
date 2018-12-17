@@ -16,7 +16,7 @@ utilities:
     - odbc-mssql17 # MS SQL server ODBC libraries
     - sqlsvr72 # MS SQL PHP 7.2 drivers
 utility-sources:
-  odbc: https://github.com/admturner/vvv-odbc-utility.git
+  odbc: https://github.com/admturner/vvv-odbc-utilities.git
   branch: master
 ```
 
@@ -36,7 +36,7 @@ utilities:
     - sqlsvr72 # MS SQL PHP 7.2 drivers
 
 utility-sources:
-  odbc: https://github.com/admturner/vvv-odbc-utility.git
+  odbc: https://github.com/admturner/vvv-odbc-utilities.git
   branch: master
 ```
 
@@ -68,3 +68,5 @@ For more see the [official VVV documentation on utilities](https://varyingvagran
 ## References
 
 * [Installing the Microsoft ODBC Driver for SQL Server on Linux and macOS](https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-2017) (2018-12-03)
+* [Linux and macOS Installation Tutorial for the Microsoft Drivers for PHP for SQL Server](https://docs.microsoft.com/en-us/sql/connect/php/installation-tutorial-linux-mac?view=sql-server-2017) (2018-07-19)
+* [Microsoft/msphpsql repository: Linux and macOS Installation Tutorial](https://github.com/Microsoft/msphpsql/blob/master/Linux-mac-install.md)
