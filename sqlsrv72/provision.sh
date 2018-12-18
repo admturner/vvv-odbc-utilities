@@ -30,22 +30,9 @@ sqlsrv_install() {
 }
 
 configure() {
-  # TODO don't want to add this every time; try to get it to add these lines
-  # only if they don't already exist
-  # 1. Find out if pecl installs these config files --> it doesn't seem to; could probably cp them instead
-  # 2. Check it these lines are getting duplicated on repeat provisions
-  #   - Yes, they are getting duplicated with every provision :(
-  # 2. If yes, then maybe use grep to check first
-  # 3. If no, then maybe use cp instead and store these configs locally
-
-  # Configure to load the sqlsrv drivers at PHP startup.
   echo "Adding sqlsrv and pdo_sqlsrv to php ini..."
-  # echo "extension=pdo_sqlsrv.so" >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/30-pdo_sqlsrv.ini
-  # echo "extension=sqlsrv.so" >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/20-sqlsrv.ini
 
   # Copy sqlsvr fpm configuration from local.
-  # OLD WAY echo "extension=sqlsrv.so" >> /etc/php/7.2/fpm/conf.d/20-sqlsrv.ini
-  # OLD WAY echo "extension=pdo_sqlsrv.so" >> /etc/php/7.2/fpm/conf.d/30-pdo_sqlsrv.ini
   cp "${DIR}/php7.2-sqlsrv.ini" "/etc/php/7.2/cli/conf.d/20-sqlsrv.ini"
   cp "${DIR}/php7.2-pdo_sqlsrv.ini" "/etc/php/7.2/cli/conf.d/30-pdo_sqlsrv.ini"
   cp "${DIR}/php7.2-sqlsrv.ini" "/etc/php/7.2/fpm/conf.d/20-sqlsrv.ini"
