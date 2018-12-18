@@ -56,6 +56,7 @@ unixodbc_install() {
     echo "Installing unixodbc-dev apt-get packages..."
     apt-get -y install unixodbc-dev
   else
+    echo "Required packages already installed:"
     pkg_version=$(dpkg -s "unixodbc-dev" 2>&1 | grep 'Version:' | cut -d " " -f 2)
     print_pkg_info "unixodbc-dev" "$pkg_version"
   fi
