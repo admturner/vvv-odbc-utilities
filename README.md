@@ -2,9 +2,7 @@
 
 Utility to install Microsoft ODBC drivers for SQL Server as part of provisioning in [VVV](https://varyingvagrantvagrants.org/).
 
-**System requirements warning**: At present this seems to require at least Ubuntu 16.04 LTS (Xenial) to work correctly (due to problems encountered with the <16.04 Microsoft drivers and `unixodbc` package). VVV installs Ubuntu 14.04 LTS (Trusty) by default.
-
-:construction: There is an experimental fork of VVV that uses Ubuntu 16.04 instead that you can use with `git clone -b use-ubuntu1604 https://github.com/admturner/VVV.git`, but it is still in development so your mileage may vary.
+**System requirements warning**: This utility requires VVV 3.0 or greater. At present it needs least Ubuntu 16.04 LTS (Xenial) to work correctly (due to problems encountered with the < 16.04 Microsoft drivers and `unixodbc` package). VVV prior to version 3.0 installed Ubuntu 14.04 LTS (Trusty).
 
 ## How to use
 
@@ -42,26 +40,27 @@ For more see the [official VVV documentation on utilities](https://varyingvagran
 
 ## APT packages this installs
 
-* `unixodbc-dev` (ODBC libraries for UNIX, development files)
-* `msodbcsql17` (Microsoft ODBC Driver 17 for SQL Server)
+- `unixodbc-dev` (ODBC libraries for UNIX, development files)
+- `msodbcsql17` (Microsoft ODBC Driver 17 for SQL Server)
 
 *Installing the above will also install dependencies.*
 
 ## PHP Drivers this installs
 
-* `sqlsrv` [PHP SQLSVR extension](https://php.net/manual/en/book.sqlsrv.php)
-* `pdo_sqlsrv` [PHP PDO_SQLSRV extension](https://php.net/manual/en/ref.pdo-sqlsrv.php) if you want to use PDO.
+- `sqlsrv` [PHP SQLSVR extension](https://php.net/manual/en/book.sqlsrv.php)
+- `pdo_sqlsrv` [PHP PDO_SQLSRV extension](https://php.net/manual/en/ref.pdo-sqlsrv.php) if you want to use PDO.
 
 ## Supported versions
 
 **ODBC**
 
-* `odbc-mssql17`
+- `odbc-mssql17`
 
 **SQL SVR**
 
-* `sqlsrv70`
-* `sqlsrv72`
+- `sqlsrv70`
+- `sqlsrv72`
+- `sqlsrv73`
 
 ## References
 
