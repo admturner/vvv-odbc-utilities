@@ -1,0 +1,7 @@
+## Folders and files for git to ignore
+
+# OS generated files
+*~
+.Trash-*
+.DS_Store
+._*
