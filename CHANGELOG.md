@@ -17,10 +17,20 @@ This document details all notable changes to the VVV ODBC Utility provisioning p
 ### Removed (for deprecated features removed in this release)
 -->
 
-## 0.5.0 (:construction: 2019-09-23)
+## 0.5.0-beta.1 (:construction: 2019-09-23)
+
+### Changed
+
+- Revise `msodbcsql17` provisioning script to use local apt-source and apt-key files to more closely manage versions and avoid network requests.
+- :memo: Update supports section in Readme to include all PHP => 7.
+- :wrench: Update .editorconfig to align with VVV standards.
 
 ### Added
 
+- Local apt-source list and apt-key key for Microsoft ODBC Driver.
+- Generic provisioning script and .ini files to install and configure `sqlsrv` and `pdo_sqlsrv` for any active PHP versions from 7.0 to 7.3.
+- :wrench: Create a version file.
+- :wrench: A .gitattributes file to enforce LF line endings.
 - :memo: A changelog.
 
 ## 0.4.0 (2019-08-05)
