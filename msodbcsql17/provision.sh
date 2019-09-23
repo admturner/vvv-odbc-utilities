@@ -1,29 +1,5 @@
 #!/usr/bin/env bash
-
-### FUNCTIONS
-
-network_detection() {
-  # Network Detection
-  #
-  # Make an HTTP request to google.com to determine if outside access is available
-  # to us. If 3 attempts with a timeout of 5 seconds are not successful, then we'll
-  # skip a few things further in provisioning rather than create a bunch of errors.
-  if [[ "$(wget --tries=3 --timeout=5 --spider --recursive --level=2 http://google.com 2>&1 | grep 'connected')" ]]; then
-    echo "Network connection detected..."
-    ping_result="Connected"
-  else
-    echo "Network connection not detected. Unable to reach google.com..."
-    ping_result="Not Connected"
-  fi
-}
-
-network_check() {
-  network_detection
-  if [[ ! "$ping_result" == "Connected" ]]; then
-    echo -e "\nNo network connection available, skipping package installation"
-    exit 0
-  fi
-}
+DIR=`dirname $0`
 
 not_installed() {
   dpkg -s "$1" 2>&1 | grep -q 'Version:'
@@ -68,11 +44,16 @@ msodbcsql_install() {
   if not_installed "msodbcsql17"; then
     echo " * msodbcsql17 [not installed]"
 
-    # Apply the MS ODBC signing key
-    wget --quiet https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
+    echo " * Checking Apt Keys"
+    if [[ ! $( apt-key list | grep 'Microsoft' ) ]]; then
+      # Apply the Microsoft ODBC signing key
+      echo "Applying Microsoft signing key..."
+      apt-key add "${DIR}/msodbcsql17.pgp.key"
+    fi
 
     # Add the MS SQL Drivers to the apt sources.
-    wget --quiet https://packages.microsoft.com/config/ubuntu/16.04/prod.list -O- > /etc/apt/sources.list.d/mssql-release.list
+    echo " * Copying Microsoft ODBC Driver source"
+    cp -f "${DIR}/apt-source-msodbcsql.list" /etc/apt/sources.list.d/msodbcsql-sources.list
 
     # Update all of the package references before installing anything
     echo "Running apt-get update..."
@@ -81,11 +62,17 @@ msodbcsql_install() {
     # Install required packages
     echo "By installing this package you agree with the MS ODBC Drivers EULA"
     echo "Installing msodbcsql17 apt-get packages..."
-    ACCEPT_EULA=Y apt-get install msodbcsql17
+    if ! ACCEPT_EULA=Y apt-get install msodbcsql17; then
+      echo "Installing msodbcsql17 apt-get package returned a failure code, cleaning up apt caches then exiting"
+      apt-get clean
+      return 1
+    fi
   else
     pkg_version=$(dpkg -s "msodbcsql17" 2>&1 | grep 'Version:' | cut -d " " -f 2)
     print_pkg_info "msodbcsql17" "$pkg_version"
   fi
+
+  return 0
 }
 
 clean() {
@@ -97,7 +84,6 @@ clean() {
     apt-get clean
 }
 
-network_check
 unixodbc_install
 msodbcsql_install
 clean
