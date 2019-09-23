@@ -11,8 +11,8 @@ Add the following to your `vvv-custom.yml` configuration file:
 ```yml
 utilities:
   odbc:
-    - odbc-mssql17 # MS SQL server ODBC libraries
-    - sqlsrv72 # MS SQL PHP 7.2 drivers
+    - msodbcsql17 # MS SQL server ODBC libraries
+    - sqlsrv # MS SQL PHP drivers
 utility-sources:
   odbc: https://github.com/admturner/vvv-odbc-utilities.git
 ```
@@ -26,15 +26,19 @@ utilities:
     - opcache-status # opcache management
     - phpmyadmin # Web based database client
     - webgrind # PHP Debugging
-    - trusted-hosts # GitHub etc
-    - tls-ca # SSL
+    - tls-ca # SSL/TLS certificates
+    - mongodb # needed for Tideways/XHGui
+    - tideways # PHP profiling tool
+    - php73
   odbc:
-    - odbc-mssql17 # MS SQL server ODBC libraries
-    - sqlsrv72 # MS SQL PHP 7.2 drivers
+    - msodbcsql17 # MS SQL server ODBC libraries
+    - sqlsrv # PHP SQL server extensions
 
 utility-sources:
   odbc: https://github.com/admturner/vvv-odbc-utilities.git
 ```
+
+This configuration would install the default VVV PHP version (currently 7.2) as well as PHP 7.3. The VVV ODBC Utility would then install the Microsoft SQL Server Driver 17 and dependencies and would then install and configure the `sqlsrv` and `pdo_sqlsrv` PHP modules for PHP 7.2 and 7.3.
 
 For more see the [official VVV documentation on utilities](https://varyingvagrantvagrants.org/docs/en-US/utilities/).
 
@@ -54,7 +58,7 @@ For more see the [official VVV documentation on utilities](https://varyingvagran
 
 **ODBC**
 
-- Ubuntu 18.04 and 18.10.
+- Ubuntu 18.04.
 
 **SQL SVR**
 
