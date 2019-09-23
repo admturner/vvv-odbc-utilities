@@ -54,13 +54,11 @@ For more see the [official VVV documentation on utilities](https://varyingvagran
 
 **ODBC**
 
-- `odbc-mssql17`
+- Ubuntu 18.04 and 18.10.
 
 **SQL SVR**
 
-- `sqlsrv70`
-- `sqlsrv72`
-- `sqlsrv73`
+- PHP 7.0, 7.1, 7.2, and 7.3.
 
 ## References
 
