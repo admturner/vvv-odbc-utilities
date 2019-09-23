@@ -62,7 +62,7 @@ msodbcsql_install() {
     # Install required packages
     echo "By installing this package you agree with the MS ODBC Drivers EULA"
     echo "Installing msodbcsql17 apt-get packages..."
-    if ! ACCEPT_EULA=Y apt-get install msodbcsql17; then
+    if ! ACCEPT_EULA=Y apt-get -y install msodbcsql17; then
       echo "Installing msodbcsql17 apt-get package returned a failure code, cleaning up apt caches then exiting"
       apt-get clean
       return 1
