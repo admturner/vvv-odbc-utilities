@@ -39,7 +39,7 @@ This document details all notable changes to the VVV ODBC Utility provisioning p
 
 ### Removed
 
-- :fire: Delete unneeded PHP-version-specific sqlsvr provision tools.
+- :fire: Delete unneeded PHP-version-specific sqlsrv provision tools.
 
 ## 0.4.0 (2019-08-05)
 

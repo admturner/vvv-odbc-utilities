@@ -51,7 +51,7 @@ For more see the [official VVV documentation on utilities](https://varyingvagran
 
 ## PHP Drivers this installs
 
-- `sqlsrv` [PHP SQLSVR extension](https://php.net/manual/en/book.sqlsrv.php)
+- `sqlsrv` [PHP SQLSRV extension](https://php.net/manual/en/book.sqlsrv.php)
 - `pdo_sqlsrv` [PHP PDO_SQLSRV extension](https://php.net/manual/en/ref.pdo-sqlsrv.php) if you want to use PDO.
 
 ## Supported versions

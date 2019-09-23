@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# PHP SQLSVR and PDO_SQLSRV extensions
+# PHP SQLSRV and PDO_SQLSRV extensions
 DIR=`dirname $0`
 
 install_sqlsrv() {
@@ -54,10 +54,10 @@ restart_php() {
   service nginx restart > /dev/null 2>&1
 }
 
-echo "Installing SQLSVR and PDO_SQLSRV"
+echo "Installing SQLSRV and PDO_SQLSRV"
 DIR=$(dirname "$0")
 install_sqlsrv
 configure_sqlsrv
 restart_php
 
-echo "SQLSVR and PDO_SQLSRV installed"
+echo "SQLSRV and PDO_SQLSRV installed"
