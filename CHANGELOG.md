@@ -17,10 +17,11 @@ This document details all notable changes to the VVV ODBC Utility provisioning p
 ### Removed (for deprecated features removed in this release)
 -->
 
-## 0.5.0-beta.3 (:construction: 2019-09-23)
+## 0.5.0-beta.4 (:construction: 2019-09-24)
 
 ### Fixed
 
+- Set pdo_sqlsrv module to priority 30.
 - :pencil2: Fix more sqlsrv typos...
 - Add `-y` flag to `msodbcsql17` apt installation script.
 
