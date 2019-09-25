@@ -17,7 +17,7 @@ This document details all notable changes to the VVV ODBC Utility provisioning p
 ### Removed (for deprecated features removed in this release)
 -->
 
-## 0.5.0-beta.5 (:construction: 2019-09-25)
+## 0.5.0-beta.6 (:construction: 2019-09-25)
 
 ### Fixed
 
@@ -28,6 +28,7 @@ This document details all notable changes to the VVV ODBC Utility provisioning p
 
 ### Changed
 
+- Include success check for installing `unixodbc` packages and add `apt-get` flags to attempt to fix broken and missing packages.
 - Separate the `sqlsrv` and `pdo_sqlsrv` install scripts and consolidate with configuration.
 - Revise `msodbcsql17` provisioning script to use local apt-source and apt-key files to more closely manage versions and avoid network requests.
 - :memo: Update supports section and in Readme to include all PHP => 7 and revise sample `vvv-custom` config to match changes.
