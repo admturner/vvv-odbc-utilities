@@ -1,2 +1,3 @@
 # Provides Microsoft ODBC SQL Driver 17
 deb [arch=amd64] https://packages.microsoft.com/ubuntu/18.04/prod bionic main
+deb-src https://packages.microsoft.com/ubuntu/18.04/prod bionic main
