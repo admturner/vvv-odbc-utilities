@@ -30,12 +30,18 @@ unixodbc_install() {
   if not_installed "unixodbc-dev"; then
     echo " * unixodbc-dev [not installed]"
     echo "Installing unixodbc-dev apt-get packages..."
-    apt-get -y install unixodbc-dev
+    if ! apt-get -y install --fix-missing --fix-broken unixodbc-dev; then
+      echo "Installing apt-get packages returned a failure code, cleaning up apt caches then exiting"
+        apt-get clean
+        return 1
+    fi
   else
     echo "Required packages already installed:"
     pkg_version=$(dpkg -s "unixodbc-dev" 2>&1 | grep 'Version:' | cut -d " " -f 2)
     print_pkg_info "unixodbc-dev" "$pkg_version"
   fi
+
+  return 0
 }
 
 msodbcsql_install() {
@@ -62,7 +68,7 @@ msodbcsql_install() {
     # Install required packages
     echo "By installing this package you agree with the MS ODBC Drivers EULA"
     echo "Installing msodbcsql17 apt-get packages..."
-    if ! ACCEPT_EULA=Y apt-get -y install msodbcsql17; then
+    if ! ACCEPT_EULA=Y apt-get -y install --fix-missing --fix-broken msodbcsql17; then
       echo "Installing msodbcsql17 apt-get package returned a failure code, cleaning up apt caches then exiting"
       apt-get clean
       return 1
