@@ -17,16 +17,18 @@ This document details all notable changes to the VVV ODBC Utility provisioning p
 ### Removed (for deprecated features removed in this release)
 -->
 
-## 0.5.0-beta.4 (:construction: 2019-09-24)
+## 0.5.0-beta.5 (:construction: 2019-09-25)
 
 ### Fixed
 
-- Set pdo_sqlsrv module to priority 30.
+- :bug: Fix #2 install `sqlsrv` and `pdo_sqlsrv` for all in-use versions of PHP instead of only for the active version.
+- Set `pdo_sqlsrv` module to priority 30.
 - :pencil2: Fix more sqlsrv typos...
 - Add `-y` flag to `msodbcsql17` apt installation script.
 
 ### Changed
 
+- Separate the `sqlsrv` and `pdo_sqlsrv` install scripts and consolidate with configuration.
 - Revise `msodbcsql17` provisioning script to use local apt-source and apt-key files to more closely manage versions and avoid network requests.
 - :memo: Update supports section and in Readme to include all PHP => 7 and revise sample `vvv-custom` config to match changes.
 - :wrench: Update .editorconfig to align with VVV standards.
